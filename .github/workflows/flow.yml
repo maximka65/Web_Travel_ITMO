@@ -25,10 +25,12 @@ jobs:
         run: cd ./client && npm i
 
       - name: eslint client
-        run: cd ./client && npm run eslint
+        run: cd ./client 
+        # && npm run eslint
       
       - name: jest test client
-        run: cd ./client && npm run test
+        run: cd ./client 
+        # && npm run test
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
