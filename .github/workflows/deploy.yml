@@ -1,28 +1,21 @@
-name: Github Pages Deploy
-
-# this action will deploy the project on gh-pages automaticaly
-
-on:
-  push:
-    branches:
-      - 'master'
-
+name: Build and Deploy
+on: [push]
+permissions:
+  contents: write
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [15.x]
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
-      - name: Install and build
-        run: cd client && npm install && npm run build
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          cd client
+          npm i
+          npm run build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: ./client/build # The folder the action should dep
+          folder: client/build # The folder the action should deploy.
