@@ -1,8 +1,8 @@
 {
   "name": "web_projectitmo2022",
   "version": "0.1.0",
-  "homepage": "https://maximka65.github.com/test_web",
-  "private": true,
+  "homepage": "https://maximka65.github.com/test_web/client",
+  "private": false,
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -26,7 +26,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:3000",
   "lint-staged": {
     "./src/**/*.js": [
       "eslint",
