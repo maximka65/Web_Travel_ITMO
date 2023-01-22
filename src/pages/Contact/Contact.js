@@ -1,7 +1,10 @@
 import React from 'react';
 import Contactcss from './contact.module.css';
+import useAnalyticsEventTracker from '../../components/GoogleEventTracker';
 
 function GetInTouch() {
+  const gaEventTracker = useAnalyticsEventTracker('Contact us');
+
   return (
     <div className={Contactcss.container}>
       <div className={Contactcss.content}>
@@ -27,7 +30,7 @@ function GetInTouch() {
               placeholder="How can we Help you?"
             />
           </div>
-          <input className={Contactcss.send} type="submit" value="Send" />
+          <input className={Contactcss.send} type="submit" value="Send" onClick={() => gaEventTracker('call')} />
         </form>
       </div>
     </div>
