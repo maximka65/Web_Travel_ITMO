@@ -11,7 +11,7 @@ import NewPost from './pages/Blog/NewPost';
 
 function App() {
   return (
-    <Router>
+    <>
       <Header />
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -22,7 +22,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/new_post" element={<NewPost />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 
