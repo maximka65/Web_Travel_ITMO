@@ -1,8 +1,6 @@
 name: Flow
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
     branches:
       - main
@@ -13,28 +11,50 @@ on:
       - dev
 
 jobs:
-  run-linters:
-    name: Run linters
+  deploy:
+    name: deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Install modules
+      - name: Install modules client
         run: cd ./client && npm i
 
       - name: eslint client
-        run: cd ./client 
-        # && npm run eslint
+        run: cd ./client && npm run eslint
       
       - name: jest test client
-        run: cd ./client 
-        # && npm run test
+        run: cd ./client && npm run test
+      
+      - name: Install modules back
+        run: cd ./backend && npm i
+
+      - name: eslint back
+        run: cd ./backend && npm run eslint
+
+      # to do реализовать запуск монги внутри, запуск бэка и запуск фронта
+      # - name: mongo setup
+      
+      # - name: run backend
+      #   run: cd ./backend && npm start
+      
+      # - name: run client
+      #   run: cd ./client && npm start
+      
+      # - name: run e2e tests
+      #   run: cd ./client && npm run test:cypress
+
+      - name: Build
+        run: npm run build
+      
+      - name: Deploy Front
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages # На какую ветку будет деплоится
+          folder: build # Какую папку экшн задеплоит
 
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # DISABLE_ERRORS: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #нужен для чекаута и деплоя
           VALIDATE_MARKDOWN: false
-
-
